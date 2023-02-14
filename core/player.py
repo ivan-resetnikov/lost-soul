@@ -7,10 +7,10 @@ Controller = {
 	'brake_friction': 0.4,
 
 	'jump_force': -3.5,
-	'coyote_jump_time': 12,
+	'coyote_jump_time': 11,
 
 	'jump_gravity' : 0.1,
-	'glide_gravity': 0.05,
+	'glide_gravity': 0.07,
 	'fall_gravity' : 0.2
 }
 
@@ -58,7 +58,6 @@ class Player :
 	def update (self, dt, colliders) :
 		keys = pg.key.get_pressed()
 
-
 		### horizontal movement
 		if keys[pg.K_a] :
 			self.vel[0] -= Controller['speed']
@@ -94,7 +93,7 @@ class Player :
 			# gravity
 			if self.vel[1] > 0 : self.vel[1] += Controller['fall_gravity']
 			if self.vel[1] < 0 : self.vel[1] += Controller['jump_gravity']
-			if self.vel[1] == 0 : self.vel[1] += Controller['glide_gravity']
+			if self.vel[1] < 1 and self.vel[1] > -1 : self.vel[1] += Controller['glide_gravity']
 
 		self.pos[1] += 1
 

@@ -22,16 +22,17 @@ class Game :
 
 
 	def update (self) :
-		self.player.update(self.dt, self.location)
-		self.camera.update()
+		self.location.update(self.dt, self.camera)
+
+		self.player.update(self.dt, self.location.tiles)
+		self.camera.update(self.dt)
 
 
 	def render (self) :
 		self.frame.fill((34, 32, 52))
 		### render
-		[tile.render(self.frame, self.camera) for tile in self.location]
-
-		self.player.render(self.frame, self.camera)
+		self.location.render(self.frame, self.camera)
+		self.player  .render(self.frame, self.camera)
 
 		### update screen
 		self.window.blit(pg.transform.scale(self.frame, self.windowSize), (0, 0))
@@ -57,7 +58,7 @@ class Game :
 		pg.mixer.quit()
 
 
-	def onStart (self) : # 132, 16, 28
+	def onStart (self) :
 		self.player = core.Player()
 		self.camera = core.Camera(self.player, self.renderSize)
 

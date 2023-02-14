@@ -12,8 +12,9 @@
 		"#' `############"
 	],
 	"COLLIDERS" : [
-		"#"
+		"#", "$", "%", "&", "@"
 	],
+	"TYPE": "void",
 	"CODES" : {
 		"#": ["void_platform.png", false, false],
 		"$": ["void_wall.png", false, false],
