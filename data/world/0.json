@@ -1,0 +1,26 @@
+{
+	"CONTENT" : [
+		"                ",
+		"                ",
+		"                ",
+		"                ",
+		"                ",
+		"                ",
+		" &#@            ",
+		" % $            ",
+		" % $            ",
+		"#' `############"
+	],
+	"COLLIDERS" : [
+		"#"
+	],
+	"CODES" : {
+		"#": ["void_platform.png", false, false],
+		"$": ["void_wall.png", false, false],
+		"%": ["void_wall.png", true, false],
+		"@": ["void_corner.png", false, false],
+		"&": ["void_corner.png", true, false],
+		"`": ["void_corner_connector.png", false, false],
+		"'": ["void_corner_connector.png", true, false]
+	}
+}
