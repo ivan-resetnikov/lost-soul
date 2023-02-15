@@ -1,3 +1,5 @@
+from .sound import Sounds
+
 import pygame as pg
 
 Controller = {
@@ -56,6 +58,8 @@ class Player :
 
 
 	def update (self, dt, colliders) :
+		self.dt = dt
+
 		keys = pg.key.get_pressed()
 
 		### horizontal movement
@@ -73,9 +77,9 @@ class Player :
 
 		# friction
 		if keys[pg.K_a] or keys[pg.K_d] :
-			self.vel[0] *= Controller['run_friction']
+			self.vel[0] *= Controller['run_friction'] * self.dt
 		if not keys[pg.K_a] and not keys[pg.K_d] :
-			self.vel[0] *= Controller['brake_friction']
+			self.vel[0] *= Controller['brake_friction'] * self.dt
 
 		### gravity
 		self.pos[1] += self.vel[1]
@@ -91,13 +95,17 @@ class Player :
 
 		else :
 			# gravity
-			if self.vel[1] > 0 : self.vel[1] += Controller['fall_gravity']
-			if self.vel[1] < 0 : self.vel[1] += Controller['jump_gravity']
-			if self.vel[1] < 1 and self.vel[1] > -1 : self.vel[1] += Controller['glide_gravity']
+			if self.vel[1] > 0 : self.vel[1] += Controller['fall_gravity'] * self.dt
+			if self.vel[1] < 0 : self.vel[1] += Controller['jump_gravity'] * self.dt
+			if self.vel[1] < 1 and self.vel[1] > -1 : self.vel[1] += Controller['glide_gravity'] * self.dt
 
 		self.pos[1] += 1
 
-		if colliding(self, colliders) : self.isLanded = True
+		if colliding(self, colliders) :
+			if not self.isLanded :
+				Sounds['player']['land'].play()
+			self.isLanded = True
+
 		else : self.isLanded = False
 
 		self.pos[1] -= 2
@@ -111,6 +119,10 @@ class Player :
 		if keys[pg.K_SPACE] and self.time_since_landed > 0 and not self.holding_space :
 			self.vel[1] = Controller['jump_force']
 			self.holding_space = True
+
+			self.pos[1] += self.vel[1]
+
+			Sounds['player']['jump'].play()
 
 		# cut jump height
 		self.pos[1] += 3
@@ -140,14 +152,16 @@ class Player :
 			if self.anim['idle'] >= 0  and self.anim['idle'] < 15 : img = self.img[0]
 			if self.anim['idle'] >= 15 and self.anim['idle'] < 30 : img = self.img[1]
 
-			self.anim['idle'] += 1
+			self.anim['idle'] += 1 * self.dt
 
 		elif self.isLanded and (keys[pg.K_a] or keys[pg.K_d]) :
 			if self.anim['walk'] >= 0  and self.anim['walk'] < 5  : img = self.img[2]
 			if self.anim['walk'] >= 5  and self.anim['walk'] < 10 : img = self.img[3]
 			if self.anim['walk'] >= 10 and self.anim['walk'] < 20 : img = self.img[4]
 
-			self.anim['walk'] += 1
+			if self.anim['walk'] in [5, 10, 20] : Sounds['player']['walk'].play()
+
+			self.anim['walk'] += 1 * self.dt
 
 		elif not self.isLanded :
 			if self.vel[1] > 0 : img = self.img[6]

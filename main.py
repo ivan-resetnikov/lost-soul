@@ -29,9 +29,11 @@ class Game :
 
 
 	def render (self) :
+		pg.display.set_caption('{title} | FPS: {fps}'.format(title=self.title, fps=round(self.clock.get_fps())))
 		self.frame.fill((34, 32, 52))
+
 		### render
-		self.location.render(self.frame, self.camera)
+		self.location.render(self.frame, self.camera, self.player)
 		self.player  .render(self.frame, self.camera)
 
 		### update screen
@@ -62,7 +64,7 @@ class Game :
 		self.player = core.Player()
 		self.camera = core.Camera(self.player, self.renderSize)
 
-		self.location = core.loadLocation(self.player)
+		self.location = core.loadLocation(self.player, self.camera)
 
 
 
