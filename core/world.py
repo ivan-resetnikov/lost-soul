@@ -60,7 +60,7 @@ class Location :
 		
 		[tile.render(frame, cam, player) for tile in self.tiles]
 
-		[npc.render(frame, cam) for npc in self.npc]
+		[npc.render(frame, cam, player) for npc in self.npc]
 
 
 

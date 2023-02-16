@@ -2,12 +2,23 @@
 	"name": "Test",
 
 	"location" : {
-		"pos" : [0, 0],
+		"pos" : [50, 48],
 		"location" : "0"
 	},
 
 	"dialogue" : {
-		"<speed=5><wave=5><color=(255, 255, 255)>Hiiii~ <color=(255, 0, 0)>♥" : {"type": "listen", "children": {}}
+		"0" : {"text": [
+			"Hey! What are ",
+			{"color": [251, 242, 54]},
+			"you",
+			{"color": [255, 255, 255]},
+			" doing ",
+			{"color": [251, 242, 54]},
+			"HERE",
+			{"color": [255, 255, 255]},
+			"!"
+
+		], "type": "listen", "children": {}}
 	},
 	
 	"img" : {

@@ -64,7 +64,7 @@ class VoidBG :
 		if self.leafSpawnCooldown == 0 :
 			pos = [
 				250 + 4 + cam.pos[0],
-				randint(round(-100 - cam.pos[1]), round(200 - cam.pos[1]))
+				randint(round(-100 + cam.pos[1]), round(200 + cam.pos[1]))
 			]
 
 			self.leaves.append([self.leafImg, pos, self.leafImg.copy(), 0, [-1, 0.25]])

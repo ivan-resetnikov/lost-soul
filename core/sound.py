@@ -1,6 +1,4 @@
 from pygame import mixer
-mixer.init()
-
 
 
 def loadSound (path, vol=0.25) :

@@ -1,4 +1,7 @@
 import pygame as pg
+pg.mixer.init()
+pg.font.init()
+pg.init()
 
 import core
 
@@ -9,7 +12,7 @@ class Game :
 		### settings
 		self.windowSize = (1000, 800)
 		self.renderSize = (250, 200)
-		self.title = 'Lost Soul | V 1.0'
+		self.title = 'Lost Soul | V 1.2'
 
 		self.fps = 60
 		self.dt  = 1
