@@ -13,7 +13,9 @@ Controller = {
 
 	'jump_gravity' : 0.1,
 	'glide_gravity': 0.07,
-	'fall_gravity' : 0.2
+	'fall_gravity' : 0.2,
+
+	'max_fall_speed' : 6.5
 }
 
 
@@ -98,6 +100,8 @@ class Player :
 			if self.vel[1] > 0 : self.vel[1] += Controller['fall_gravity'] * self.dt
 			if self.vel[1] < 0 : self.vel[1] += Controller['jump_gravity'] * self.dt
 			if self.vel[1] < 1 and self.vel[1] > -1 : self.vel[1] += Controller['glide_gravity'] * self.dt
+
+			if self.vel[1] > Controller['max_fall_speed'] : self.vel[1] = Controller['max_fall_speed']
 
 		self.pos[1] += 1
 

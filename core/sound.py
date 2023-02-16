@@ -11,8 +11,8 @@ def loadSound (path, vol=0.25) :
 
 Sounds = {
 	'player' : {
-		'walk' : loadSound('walk', 0.1),
-		'jump' : loadSound('jump'),
-		'land' : loadSound('land')
+		'walk' : loadSound('walk', 0.025),
+		'jump' : loadSound('jump', 0.2),
+		'land' : loadSound('land', 0.07)
 	}
 }

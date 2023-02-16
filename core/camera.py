@@ -9,5 +9,6 @@ class Camera :
 
 
 	def update (self, dt) :
+		### move towards target
 		self.pos[0] += (self.target.pos[0] - self.screenOffset[0] - self.pos[0]) * self.focusSpeed * dt
 		self.pos[1] += (self.target.pos[1] - self.screenOffset[1] - self.pos[1]) * self.focusSpeed * dt

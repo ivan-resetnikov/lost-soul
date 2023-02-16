@@ -49,7 +49,7 @@ class VoidBG :
 			img.set_alpha(randint(70, 175))
 
 			# depth for parallax effect
-			z = randint(2, 7)
+			z = randint(2, 9)
 
 			pos = [
 				randint(round(0 + (cam.pos[0] / z)),
@@ -64,7 +64,7 @@ class VoidBG :
 		if self.leafSpawnCooldown == 0 :
 			pos = [
 				250 + 4 + cam.pos[0],
-				randint(round(-100 + cam.pos[1]), round(200 + cam.pos[1]))
+				randint(round(-100 - cam.pos[1]), round(200 - cam.pos[1]))
 			]
 
 			self.leaves.append([self.leafImg, pos, self.leafImg.copy(), 0, [-1, 0.25]])
@@ -90,7 +90,7 @@ class VoidBG :
 			rect[1][1] -= 0.125  * self.dt
 
 			# remove useless rects
-			if rect[1][1] < (-32 - (cam.pos[0] / rect[4]) ) : toRemove.append(rect)
+			if rect[1][1] < (-32 - (cam.pos[1] / rect[4]) ) : toRemove.append(rect)
 
 		for rect in toRemove : self.rects.remove(rect)
 
@@ -112,7 +112,7 @@ class VoidBG :
 			leaf[1][1] += leaf[4][1] * self.dt
 
 			# remove useless leaves
-			if leaf[1][0] - cam.pos[0] < -4 : toRemove.append(leaf)
+			if leaf[1][0] < -8 + cam.pos[0] : toRemove.append(leaf)
 
 		for leaf in toRemove : self.leaves.remove(leaf)
 
