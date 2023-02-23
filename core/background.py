@@ -5,7 +5,7 @@ from random import randint
 
 
 class VoidBG :
-	def __init__ (self, cam) :
+	def __init__ (self, cam, windowSize) :
 		# rects
 		self.rects = []
 		self.rectSpawnCooldown = 0
@@ -13,6 +13,8 @@ class VoidBG :
 		# leaves
 		self.leaves = []
 		self.leafSpawnCooldown = 0
+
+		self.windowSize = windowSize
 
 		# rects
 		for _ in range(15) :
@@ -23,7 +25,7 @@ class VoidBG :
 			img.set_colorkey((0, 0, 0))
 			img.set_alpha(randint(70, 100))
 			z = randint(2, 7)
-			self.rects.append([img, [randint(round(0 + (cam.pos[0] / z)), round(250 + (cam.pos[0] / z))), randint(0, (200 + 32))], img, randint(0, 360), z])
+			self.rects.append([img, [randint(round(0 + (cam.pos[0] / z)), round(self.windowSize[0] + (cam.pos[0] / z))), randint(0, (self.windowSize[1] + 32))], img, randint(0, 360), z])
 
 		# leaves
 		self.leafImg = pg.image.load('assets/objects/leaf.png').convert_alpha()
@@ -52,19 +54,19 @@ class VoidBG :
 			z = randint(2, 9)
 
 			pos = [
-				randint(round(0 + (cam.pos[0] / z)),
-				round(250 + (cam.pos[1] / z))), 200 + 32
+				randint(round(0 + (cam.pos[0] / z)), round(self.windowSize[0] + (cam.pos[1] / z))),
+				self.windowSize[1] + 32
 			]
 
 			self.rects.append([img, pos, img, 0, z])
 
-			self.rectSpawnCooldown = 60
+			self.rectSpawnCooldown = 100
 
 		### spawn leaf
 		if self.leafSpawnCooldown == 0 :
 			pos = [
-				250 + 4 + cam.pos[0],
-				randint(round(-100 + cam.pos[1]), round(200 + cam.pos[1]))
+				self.windowSize[0] + 4 + cam.pos[0],
+				randint(round(-100 + cam.pos[1]), round(self.windowSize[1] + cam.pos[1]))
 			]
 
 			self.leaves.append([self.leafImg, pos, self.leafImg.copy(), 0, [-1, 0.25]])

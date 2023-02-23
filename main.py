@@ -10,17 +10,18 @@ import core
 class Game :
 	def __init__ (self) :
 		### settings
-		self.windowSize = (1000, 800)
-		self.renderSize = (250, 200)
+		self.windowSize = (1920, 1080)
+		self.renderSize = (480, 270)
 		self.title = 'Lost Soul | V 1.2'
 
 		self.fps = 60
 		self.dt  = 1
 
 		### window
-		self.window = pg.display.set_mode(self.windowSize)
+		self.window = pg.display.set_mode(self.windowSize, pg.FULLSCREEN)
 		self.frame  = pg.Surface(self.renderSize)
 		self.clock  = pg.time.Clock()
+
 		pg.display.set_caption(self.title)
 
 
@@ -32,7 +33,6 @@ class Game :
 
 
 	def render (self) :
-		pg.display.set_caption('{title} | FPS: {fps}'.format(title=self.title, fps=round(self.clock.get_fps())))
 		self.frame.fill((34, 32, 52))
 
 		### render
@@ -67,7 +67,7 @@ class Game :
 		self.player = core.Player()
 		self.camera = core.Camera(self.player, self.renderSize)
 
-		self.location = core.loadLocation(self.player, self.camera)
+		self.location = core.loadLocation(self.player, self.camera, self.renderSize)
 
 
 

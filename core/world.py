@@ -41,8 +41,8 @@ class Tile :
 
 
 class Location :
-	def __init__ (self, tiles, name, cam, npc) :
-		self.bg = LocationTypes[name](cam)
+	def __init__ (self, tiles, name, cam, npc, windowSize) :
+		self.bg = LocationTypes[name](cam, windowSize)
 
 		self.tiles = tiles
 
@@ -64,7 +64,7 @@ class Location :
 
 
 
-def loadLocation (player, cam) :
+def loadLocation (player, cam, windowSize) :
 	file = readFromJSON(f'data/world/{player.location}.json')
 
 	### load tiles
@@ -83,4 +83,4 @@ def loadLocation (player, cam) :
 	for name in file['NPC'] : npc.append(NPC(name))
 
 	### return data
-	return Location(tiles, file['TYPE'], cam, npc)
+	return Location(tiles, file['TYPE'], cam, npc, windowSize)
